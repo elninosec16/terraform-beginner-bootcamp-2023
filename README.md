@@ -46,5 +46,5 @@ error: failed to push some refs to 'https://github.com/elninosec16/terraform-beg
 
 ### Support Links:
 
-- [^1]:[ Semantic Versioning 2.0.0 ](https://semver.org/)
-- [^2]:[ Managing your personal access tokens ](https://docs.github.com/en/enterprise-server@3.6/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+-[^1]:[ Semantic Versioning 2.0.0 ](https://semver.org/)
+-[^2]:[ Managing your personal access tokens ](https://docs.github.com/en/enterprise-server@3.6/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
