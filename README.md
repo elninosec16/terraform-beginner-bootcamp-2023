@@ -82,7 +82,7 @@ Based on the bootcamp content video and performing some online search about this
 
 ### Modify the Gitpod.YML file
 
-The *.Gipot.yml* file is required to be updated to successfully install the *Terraform CLI* after updating the Terraform CLI commands. Do not forget to review the *Gitpod Tasks Execution Order* fix the issue on the original code (replace the command init: with before:).
+The *.Gipot.yml* file is required to be updated to successfully install the *Terraform CLI* after updating the Terraform CLI commands. Do not forget to review the *Gitpod Tasks Execution Order*[^5] fix the issue on the original code (replace the command init: with before:).
 
 ```
 tasks:
