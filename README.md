@@ -40,12 +40,11 @@ To https://github.com/elninosec16/terraform-beginner-bootcamp-2023.git
  ! [remote rejected] 1-1_branch-tag-pr -> 1-1_branch-tag-pr (push declined due to email privacy restrictions)
 error: failed to push some refs to 'https://github.com/elninosec16/terraform-beginner-bootcamp-2023.git'
 ```
-In order to fix it, I have to go to my Github account settings and do the following:
+#### Issue #1 resolution: I have to go to my Github account settings and do the following:
   - un check the option: **"Keep my email addresses private"** for my email account 
   - Generate a new token in order to be able to push [^2].
 
-
-
 ### Support Links:
+
 - [^1]:[ Semantic Versioning 2.0.0 ](https://semver.org/)
 - [^2]:[ Managing your personal access tokens ](https://docs.github.com/en/enterprise-server@3.6/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
