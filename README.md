@@ -16,7 +16,7 @@ It's very important to keep track all of the resources use to perform any of the
 
 ### Issues found while working on any tasks:
 
-#### Issue #1: Github user credemtials issue while pushing the first commit
+#### <u>Issue #1</u>: Github user credemtials issue while pushing the first commit
 
 While pushing the first commit, I encontered an issue with the Github account :thinking: This is the error message that I got:
 
@@ -40,13 +40,18 @@ To https://github.com/elninosec16/terraform-beginner-bootcamp-2023.git
  ! [remote rejected] 1-1_branch-tag-pr -> 1-1_branch-tag-pr (push declined due to email privacy restrictions)
 error: failed to push some refs to 'https://github.com/elninosec16/terraform-beginner-bootcamp-2023.git'
 ```
-#### Issue 1 resolution: I have to go to my Github account settings and do the following:
+
+##### <u>Resolution</u>: I have to go to my Github account settings and do the following:
   - un check the option: **"Keep my email addresses private"** for my email account 
   - Generate a new token in order to be able to push [^2].
 
-### Issue 2: Manual intervensation installing Terraform CLI
 
-#### Issue 2 resolution: updaintg the Terraform CLI commands and modifying bash file permissions.  
+
+#### <u>Issue 2</u>: Manual intervensation installing Terraform CLI
+
+There is a bug with the current config on the *.gitpod.yml* file with some of the commands. This issue was created to troubleshoot and to update current config file. 
+
+##### <u>Resolution</u>: updaintg the Terraform CLI commands and modifying bash file permissions.  
 
 Based on the bootcamp content video and performing some online search about this issue, the have to update the following:
   - Update the Terraform CLI commands[^3].
@@ -80,7 +85,7 @@ Based on the bootcamp content video and performing some online search about this
   chmod 744 ./bin/installing_terraform_cli.sh
   ```
 
-### Modify the Gitpod.YML file
+  #### <u>Issue 3</u>: Modify the Gitpod.YML file
 
 The *.Gipot.yml* file is required to be updated to successfully install the *Terraform CLI* after updating the Terraform CLI commands. Do not forget to review the *Gitpod Tasks Execution Order* fix the issue on the original code (replace the command init: with before:).
 
@@ -103,15 +108,28 @@ vscode:
     - amazonwebservices.aws-toolkit-vscode
     - hashicorp.terraform
 ```
+
+#### <u>Issue 4:</u> Update Gitpod seting
+
+While using GitPod workspace, it was noticed that the GitHub username/password credntials were required every time that a new pull/push was executed. This issue section will explain how to fix this. 
  
-### Support Links:
+##### <u>Resolution:</u> Update Gitpod seting
 
-[^1]:[ Semantic Versioning 2.0.0 ](https://semver.org/)
+In order to resolve the Gitpod permission issue, the *Git Providers*[^6] settings required to be modifed under to allow Git to work properly. The *Git Providers* settings needs to be modify under User Settings > [Git Providers](https://gitpod.io/user/integrations).
 
-[^2]:[ Managing your personal access tokens ](https://docs.github.com/en/enterprise-server@3.6/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
-[^3]:[ How to install Terraform CLI ](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
-[^4]:[ Linux file permission - Chmod ](https://en.wikipedia.org/wiki/Chmod)
+### <u>Support Links</u>:
 
-[^5]:[ Gitpod Tasks Execution order ](https://www.gitpod.io/docs/configure/workspaces/tasks)
+[^1]:[Semantic Versioning 2.0.0](https://semver.org/)
+
+[^2]:[Managing your personal access tokens](https://docs.github.com/en/enterprise-server@3.6/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+
+[^3]:[How to install Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+
+[^4]:[Linux file permission - Chmod](https://en.wikipedia.org/wiki/Chmod)
+
+[^5]:[Gitpod Tasks Execution order](https://www.gitpod.io/docs/configure/workspaces/tasks)
+
+[^6]:[Gitpod Authentication and GitHub Integration](https://www.gitpod.io/docs/configure/authentication)
+
