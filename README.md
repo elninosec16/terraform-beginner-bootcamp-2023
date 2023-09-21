@@ -109,15 +109,46 @@ vscode:
     - hashicorp.terraform
 ```
 
-#### <u>Issue 4:</u> Update Gitpod seting
+#### <u>Issue 4:</u> Update Gitpod setting
 
 While using GitPod workspace, it was noticed that the GitHub username/password credntials were required every time that a new pull/push was executed. This issue section will explain how to fix this. 
  
-##### <u>Resolution:</u> Update Gitpod seting
+##### <u>Resolution:</u> Update Gitpod setting
 
 In order to resolve the Gitpod permission issue, the *Git Providers*[^6] settings required to be modifed under to allow Git to work properly. The *Git Providers* settings needs to be modify under User Settings > [Git Providers](https://gitpod.io/user/integrations).
 
+#### <u>Issue 5:</u> Create a new env var file
 
+There was some issue with the current bash script for the install terraform CLI. A new root env var file was required to fix this. 
+ 
+##### <u>Resolution:</u> Update Gitpod seting
+
+To fix the issue with installing_terraform_cli bash file, a new env var required to be created. These are some of the steps used to fix this issue:
+
+1. Create a new folder `.env.example` to define the new root env var:
+
+    .env.example
+       
+        PROJECT_ROOT='/workspace/terraform-beginner-bootcamp-2023'
+  
+2. Update the install_terraform_cli.sh bash file with the following
+  
+     cd /workspace
+     
+     cd $PROJECT_ROOT
+
+3. Define the env varibale 
+
+      ```sh
+      gp env PROJECT_ROOT='/workspace/terraform-beginner-bootcamp-2023'
+      ```
+  
+
+4. To print the env variable
+
+      ```sh
+      echo $PROJECT_ROOT
+      ```
 
 ### <u>Support Links</u>:
 
