@@ -150,6 +150,77 @@ To fix the issue with installing_terraform_cli bash file, a new env var required
       echo $PROJECT_ROOT
       ```
 
+#### <u>Issue 6:</u> AWS CLI Refactor
+
+There was some issue with the current config for the `install_aws_cli` script. During this process, I will be fixing this issue by following some of the steps provided by the task video. 
+ 
+##### <u>Resolution:</u> Following the following steps to fix all of the issues while installing AWS CLI.
+
+1. Crate a new `install_aws_cli` inside the *bin* folder 
+2. Mode the config for the `.gitpo.yml` file into the new file
+
+  ```json
+  cd /workspace
+
+  rm -f '/workspace/awscliv2.zip'
+  rm -rf '/workspace/aws'
+
+  cd /workspace
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
+    cd $THEIA_WORKSPACE_ROOT
+
+  aws sts get-caller-identity
+
+  cd $PROJECT_ROOT
+  ```
+3. Set up new env var variables on the `gitpod.yml` file for the AWS_CLI config: 
+  
+  ```sh
+  AWS_ACCESS_KEY_ID='AKIAIOSFODNN7EXAMPLE'
+  AWS_SECRET_ACCESS_KEY='wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+  AWS_DEFAULT_REGION='us-west-2'
+  ```
+  >note:this is just an example config[^7] for the env var.
+
+4. Configure AWS account access key env var for the AWS user for this bootcamp.
+  
+  - Configure the AWS CLI env var for testing
+
+  ```sh
+    export AWS_ACCESS_KEY_ID='AKIAIOSFODNN7EXAMPLE'
+    export AWS_SECRET_ACCESS_KEY='wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+    export AWS_DEFAULT_REGION='us-west-2'
+  ```
+
+  - Configure the AWS CLI env var on GitPod
+
+  ```sh
+    gp env AWS_ACCESS_KEY_ID='AKIAIOSFODNN7EXAMPLE'
+    gp eng AWS_SECRET_ACCESS_KEY='wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+    gp env AWS_DEFAULT_REGION='us-west-2'
+  ```
+
+  - Validate env var configuration:
+
+  ```sh
+  aws sts get-caller-identity
+
+{
+    "UserId": "AKIAIOSFODNN7EXAMPLE",
+    "Account": "aws-acc-#",
+    "Arn": "arn:aws:iam::account-#:user/aws-username"
+}
+  ``` 
+  - Validate the env var values from bash:
+
+  ```sh
+    env | grep AWS_
+  ```
+   - Save all the changes and commit/push to GitHub.
+
+
 ### <u>Support Links</u>:
 
 [^1]:[Semantic Versioning 2.0.0](https://semver.org/)
@@ -164,3 +235,4 @@ To fix the issue with installing_terraform_cli bash file, a new env var required
 
 [^6]:[Gitpod Authentication and GitHub Integration](https://www.gitpod.io/docs/configure/authentication)
 
+[^7]:[How to configure AWS CLI env var ](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
