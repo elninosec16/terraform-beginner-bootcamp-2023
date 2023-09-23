@@ -1,5 +1,25 @@
 #how to use random provider
 terraform {
+  #Old way to configure Terraform Cloud:
+  # https://developer.hashicorp.com/terraform/language/settings/backends/remote
+  #backend "remote" {
+  #  hostname     = "app.terraform.io"
+  #  organization = "ElninoSec16"
+  #
+  #  workspaces {
+  #    name = "tf-beginner-bootcamp-wkspce"
+  #  }
+  #}
+
+  #New way to configure Terraform Cloud:
+    cloud {
+    organization = "ElninoSec16"
+
+    workspaces {
+      name = "tf-beginner-bootcamp-wkspce"
+    }
+  }
+  
   required_providers {
     #TF random provider config
     # https://registry.terraform.io/providers/hashicorp/random/latest/docs
@@ -15,7 +35,7 @@ terraform {
     } 
   }
 }
-#**Important provide note**: be sure to perform `terraform init -upgrade` when adding new provider config to the current TF config.
+#**Important provider note**: be sure to perform `terraform init -upgrade` when adding new provider config to the current TF config.
 
 provider "random" {
   # Configuration options
