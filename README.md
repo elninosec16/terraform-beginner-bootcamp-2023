@@ -262,6 +262,58 @@ In this issue, the TF config will be updated with new `AWS Provider[^12]` to cre
 | terraform destroy | destroy resource created by the TF code |
 
 
+#### <u>Issue 9:</u> TF Cloud configuration and backup TF state file.
+
+In this task, the current TF state file will be backed up on TF Cloud. For this, the initial configuration is required. Following these steps to complete this:
+
+  1. Create a TF Cloud account.
+  2. Create a new Project and Workspace.
+  3. Generate the `TF Cloud User API Token key (CLI or GUI).
+  4. `Important` Be sure that the terraform state file is already created before the next step.
+  5. Update the current `main.tf`` file with the new TF Cloud project/workspace config.
+   
+   ```terraform
+#Old format/code to configure Terraform Cloud:
+#[TF Backend Remote Config](https://developer.hashicorp.com/terraform/language/settings/backends/remote)
+terraform {
+  backend "remote" {
+    hostname = "app.terraform.io"
+    organization = "<org-name>"
+
+    workspaces {
+      name = "workspace-name"
+    }
+  }
+}
+  
+#New format/code to configure Terraform Cloud:
+terraform {
+  cloud {
+    organization = "<org-name>"
+
+    workspaces {
+      name = "<workspace-name>"
+    }
+  }
+}
+```
+
+  6. Be sure to create the `AWS env var` on TF Cloud GUI for the terraform migration process successfully completed (TF Cloud requirement).
+  7. terraform init and apply to validate the config.
+
+>Note: if the TF Cloud credentials failed, follow this to fix it:
+[Terraform Cloud Credentials file format](https://www.reddit.com/r/Terraform/comments/rtl5ey/can_anyone_please_show_me_show_me_how/?rdt=39004)
+
+```json
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "<tf-cloud->"
+    }
+  }
+}
+```
+
 ### <u>Support Links</u>:
 
 [^1]:[Semantic Versioning 2.0.0](https://semver.org/)
