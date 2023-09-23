@@ -234,38 +234,40 @@ In this task, we will testing the Terraform (TF) environment and perform some TF
 
 - Terraform important information when executing some of the `TF CLI commands`[^10]:
 
-|| file/directory name || description ||
----
+| File/Directory Name | Description |
+| --- | --- |
 | .terraform (directory) | TF binary install |
 | .terraform/providers/registry.terraform.io/hashicorp/random | TF binary directory created |
 | terraform-provider-random_v3.5.1_x5 | terraform provider module installed (language `Go`) |
 | .terraform.lock.hcl | terraform file created when running `terraform init` |
 
 - Terraform files created when using terraform apply:
-|| file/directory name || description ||
----
+
+| File/Directory Name | Description |
+| --- | --- |
 | {} terraform.tfstate (directory) | TF state file |
 | terraform.tfstate.backup | backup of the terraform state file |
 
 
+
 ### <u>Support Links</u>:
 
-- [^1]:[Semantic Versioning 2.0.0](https://semver.org/)
+[^1]:[Semantic Versioning 2.0.0](https://semver.org/)
 
-- [^2]:[Managing your personal access tokens](https://docs.github.com/en/enterprise-server@3.6/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+[^2]:[Managing your personal access tokens](https://docs.github.com/en/enterprise-server@3.6/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
-- [^3]:[How to install Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+[^3]:[How to install Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
-- [^4]:[Linux file permission - Chmod](https://en.wikipedia.org/wiki/Chmod)
+[^4]:[Linux file permission - Chmod](https://en.wikipedia.org/wiki/Chmod)
 
-- [^5]:[Gitpod Tasks Execution order](https://www.gitpod.io/docs/configure/workspaces/tasks)
+[^5]:[Gitpod Tasks Execution order](https://www.gitpod.io/docs/configure/workspaces/tasks)
 
-- [^6]:[Gitpod Authentication and GitHub Integration](https://www.gitpod.io/docs/configure/authentication)
+[^6]:[Gitpod Authentication and GitHub Integration](https://www.gitpod.io/docs/configure/authentication)
 
-- [^7]:[How to configure AWS CLI env var ](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+[^7]:[How to configure AWS CLI env var ](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
 
-- [^8]:[Terraform Registry](https://registry.terraform.io/)
+[^8]:[Terraform Registry](https://registry.terraform.io/)
 
-- [^9]:[Terraform random_id(Resource)](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id)
+[^9]:[Terraform random_id(Resource)](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id)
 
-- [^10]:[Basic TF CL Commands](https://developer.hashicorp.com/terraform/cli/commands)
+[^10]:[Basic TF CL Commands](https://developer.hashicorp.com/terraform/cli/commands)
