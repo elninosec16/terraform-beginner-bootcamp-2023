@@ -221,7 +221,7 @@ There was some issue with the current config for the `install_aws_cli` script. D
    - Save all the changes and commit/push to GitHub.
 
 
-#### <u>Task 7:</u> TF random_id bucket id
+#### <u>Issue 7:</u> TF random_id bucket name
 
 In this task, we will testing the Terraform (TF) environment and perform some TF commands from CLI. For this test, the TF `random_id[^9]` module will be used to generate and request output values for butcket id. These are the tasks to follow for the section:
 
@@ -238,7 +238,7 @@ In this task, we will testing the Terraform (TF) environment and perform some TF
 | --- | --- |
 | .terraform (directory) | TF binary install |
 | .terraform/providers/registry.terraform.io/hashicorp/random | TF binary directory created |
-| terraform-provider-random_v3.5.1_x5 | terraform provider module installed (language `Go`) |
+| terraform-provider-random_v3.5.1_x5 | terraform provider module installed (language `Go`) when performing `terraform init`|
 | .terraform.lock.hcl | terraform file created when running `terraform init` |
 
 - Terraform files created when using terraform apply:
@@ -248,6 +248,18 @@ In this task, we will testing the Terraform (TF) environment and perform some TF
 | {} terraform.tfstate (directory) | TF state file |
 | terraform.tfstate.backup | backup of the terraform state file |
 
+
+#### <u>Issue 8:</u> TF Simple S3 bucket creation and destroy
+
+In this issue, the TF config will be updated with new `AWS Provider[^12]` to create a new AWS S3 Bucket using TF. The S3 bucket name[^11], the `random_string` config will be use as name following the `AWS S3 bucket name`. 
+
+- Terraform commands use during this issue:
+
+| TF Command Name | Description |
+| --- | --- |
+| terraform init -update | TF config to install new provider binary code |
+| terraform validate | validate TF code before performing terraform apply |
+| terraform destroy | destroy resource created by the TF code |
 
 
 ### <u>Support Links</u>:
@@ -271,3 +283,7 @@ In this task, we will testing the Terraform (TF) environment and perform some TF
 [^9]:[Terraform random_id(Resource)](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id)
 
 [^10]:[Basic TF CL Commands](https://developer.hashicorp.com/terraform/cli/commands)
+
+[^11]:[AWS S3 Bucket Name Limitation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html)
+
+[^12]:[Terraform AWS resource provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources)
