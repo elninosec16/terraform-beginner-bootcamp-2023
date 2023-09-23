@@ -221,6 +221,35 @@ There was some issue with the current config for the `install_aws_cli` script. D
    - Save all the changes and commit/push to GitHub.
 
 
+#### <u>Task 7:</u> TF random_id bucket id
+
+In this task, we will testing the Terraform (TF) environment and perform some TF commands from CLI. For this test, the TF `random_id[^9]` module will be used to generate and request output values for butcket id. These are the tasks to follow for the section:
+
+1. Use `Terraform Registry[^8]` to find the TF code example.
+2. Find the `TF code example for random_id` on TF Registry.
+3. Configure the first TF code to test environment
+4. Generate the random_string value by running the apply command
+5. Display the random_string value using the outpout command
+
+
+- Terraform important information when executing some of the `TF CLI commands`[^10]:
+
+| File/Directory Name | Description |
+| --- | --- |
+| .terraform (directory) | TF binary install |
+| .terraform/providers/registry.terraform.io/hashicorp/random | TF binary directory created |
+| terraform-provider-random_v3.5.1_x5 | terraform provider module installed (language `Go`) |
+| .terraform.lock.hcl | terraform file created when running `terraform init` |
+
+- Terraform files created when using terraform apply:
+
+| File/Directory Name | Description |
+| --- | --- |
+| {} terraform.tfstate (directory) | TF state file |
+| terraform.tfstate.backup | backup of the terraform state file |
+
+
+
 ### <u>Support Links</u>:
 
 [^1]:[Semantic Versioning 2.0.0](https://semver.org/)
@@ -236,3 +265,9 @@ There was some issue with the current config for the `install_aws_cli` script. D
 [^6]:[Gitpod Authentication and GitHub Integration](https://www.gitpod.io/docs/configure/authentication)
 
 [^7]:[How to configure AWS CLI env var ](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+
+[^8]:[Terraform Registry](https://registry.terraform.io/)
+
+[^9]:[Terraform random_id(Resource)](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id)
+
+[^10]:[Basic TF CL Commands](https://developer.hashicorp.com/terraform/cli/commands)
