@@ -314,6 +314,75 @@ terraform {
 }
 ```
 
+#### <u>Issue 10:</u> TF Cloud user access token configuration on GitPod and conifgure Terraform Alias (TF).
+
+For this issue, a new `bash script` was created to validate `credentials.tfrc.json` is created or not, and if it's not created the script will create it when the GitPod workspace is initiated. Also, a new terraform (tf) alias was updated `~/.bash_profile` to conifgure it.
+
+1. Configure TERRAFORM_CLOUD_TOKEN env var on both aws and terraform bash:
+
+###### GitPod env var definition:
+
+```bash
+gp env TERRAFORM_CLOUD_TOKEN="<tf-cloud-user-access-token>"
+```
+
+##### Bash env var definition:
+
+```bash
+export TERRAFORM_CLOUD_TOKEN="<tf-cloud-user-access-token>"
+```
+
+
+2. `Bash script` for `credentials.tfrc.json` validation and creation
+
+```bash
+#!/usr/bin/env bash
+
+# Define target directory and file
+TARGET_DIR="/home/gitpod/.terraform.d/"
+TARGET_FILE="${TARGET_DIR}/credentials.tfrc.json"
+
+# Check if TERRAFORM_CLOUD_TOKEN is set
+if [-z "$TERRAFORM_CLOUD_TOKEN" ]; then
+  echo "Error: TERRAFORM_CLOUD_TOKEN environment variable is not set."
+  exit 1
+  
+fi
+
+# Check if directory exists, if not, create it
+if [ ! -d "$TARGET_DIR" ]; then
+    mkdir -p "$TARGET_DIR"
+fi
+
+# Generate credentials.tfrc.json with token
+cat > "$TARGET_FILE" << EOF
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "$TERRAFORM_CLOUD_TOKEN"
+    }
+  }
+}
+EOF
+
+echo "credentials.tfrc.json has been generated."
+```
+
+3. Configure the new TF Alias on the `~/.bash_profile` file:
+
+- Display .bash options
+
+```bash
+open  ~/.bash
+.bash_logout   .bash_profile  .bashrc        .bashrc.d/  
+```
+
+- Open ~/.bash_profile to configure the new terraform alias
+
+```bash
+alias tf="terraform"
+```
+
 ### <u>Support Links</u>:
 
 [^1]:[Semantic Versioning 2.0.0](https://semver.org/)
