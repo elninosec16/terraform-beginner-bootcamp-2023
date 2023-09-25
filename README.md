@@ -2,4 +2,4 @@
 
 ## Weeks Journals:
 
-- [Week 0 journal](/journals/Weeko.md)
+- [Week 0 journal](/journals/Week0.md)
