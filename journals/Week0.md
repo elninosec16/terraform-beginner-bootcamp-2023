@@ -5,7 +5,7 @@
 - [Introduction](#introduction)
 - [Documentation steps to follow for each of the tasks.](#documentation-steps-to-follow-for-each-of-the-tasks)
 - [Issues found while working on any tasks:](#issues-found-while-working-on-any-tasks-)
-  * [<u>Issue #1</u>: Github user credemtials issue while pushing the first commit](#-u-issue--1--u---github-user-credemtials-issue-while-pushing-the-first-commit)
+  * [<u>Issue 1</u>: Github user credemtials issue while pushing the first commit](#-u-issue--1--u---github-user-credemtials-issue-while-pushing-the-first-commit)
     + [<u>Resolution</u>: I have to go to my Github account settings and do the following:](#-u-resolution--u---i-have-to-go-to-my-github-account-settings-and-do-the-following-)
   * [<u>Issue 2</u>: Manual intervensation installing Terraform CLI](#-u-issue-2--u---manual-intervensation-installing-terraform-cli)
     + [<u>Resolution</u>: updaintg the Terraform CLI commands and modifying bash file permissions.](#-u-resolution--u---updaintg-the-terraform-cli-commands-and-modifying-bash-file-permissions)
@@ -40,7 +40,7 @@ It's very important to keep track all of the resources use to perform any of the
 
 ### Issues found while working on any tasks:
 
-#### <u>Issue #1</u>: Github user credemtials issue while pushing the first commit
+#### <u>Issue 1</u>: Github user credemtials issue while pushing the first commit
 
 While pushing the first commit, I encontered an issue with the Github account :thinking: This is the error message that I got:
 
