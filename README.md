@@ -2,7 +2,7 @@
 
 ## TerraTowns House Project Diagram
 
-/pis/Week2.png
+![TerraTowns House Project Diagram](pics/Week2.png)
 
 ## Weeks Journals:
 
