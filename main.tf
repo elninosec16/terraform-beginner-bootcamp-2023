@@ -14,8 +14,8 @@ resource "aws_s3_bucket" "s3-btcamp-tst" {
   bucket = random_string.bucket_name.result
 
   tags = {
-    Name        = "s3-tf-bootcamp-1"
-    Environment = "bootcamp-2023"
-    Terraform	  = "True"
+    User-UUID 	= var.user_uuid
+    Terraform   = var.terraform
+    Project	    = var.project_name
   }
 }
