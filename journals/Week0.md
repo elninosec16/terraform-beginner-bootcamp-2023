@@ -407,6 +407,17 @@ open  ~/.bash
 alias tf="terraform"
 ```
 
+- Open ~/.bashrc or ~/.profile to configure the new terraform alias when using Ubuntu as local machine
+
+```bash
+alias tf="terraform"
+```
+
+And then run:
+```bash
+source ~/.bashhrc
+```
+
 ### <u>Support Links</u>:
 
 [^1]:[Semantic Versioning 2.0.0](https://semver.org/)

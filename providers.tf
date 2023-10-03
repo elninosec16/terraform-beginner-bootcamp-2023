@@ -23,10 +23,10 @@ terraform {
   required_providers {
     #TF random provider config
     # https://registry.terraform.io/providers/hashicorp/random/latest/docs
-    random = {
+    /*random = {
       source = "hashicorp/random"
       version = "3.5.1"
-    }
+    }*/
     #AWS Provider for the S3 config to work
     # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
     aws = {
