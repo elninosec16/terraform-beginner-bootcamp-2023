@@ -1,2 +1,4 @@
-user_uuid=""
-btcamp_bucket_name="yc7b0k6vvvojb00dqqsbmhsjplx9xr5h"
+user_uuid = "b1ae8798-cee7-429f-a582-57150f174eb9"
+s3_bucket_name = "yc7b0k6vvvojb00dqqsbmhsjplx9xr5h"
+project_name = "TF BootCamp Beginner 2003"
+terraform = "True"

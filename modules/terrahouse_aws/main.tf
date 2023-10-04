@@ -1,16 +1,15 @@
-#how to use random provider
 terraform {
-    cloud {
-    organization = "ElninoSec16"
-
-    workspaces {
-      name = "tf-beginner-bootcamp-wkspce"
-    }
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.17.0"
+    } 
   }
-}  
+ 
+}
 
 provider "aws" {
-    
+  
   default_tags {
     tags = {
         Terraform   = "True"
@@ -18,3 +17,4 @@ provider "aws" {
     }
   }
 }
+
