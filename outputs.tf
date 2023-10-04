@@ -4,3 +4,8 @@ output "btcamp_bucket_name" {
   value = module.terraform_aws.btcamp_bucket_name
   
 }
+
+output "s3_website_endpoint" {
+  value = module.terraform_aws.s3_website_endpoint
+  
+}
