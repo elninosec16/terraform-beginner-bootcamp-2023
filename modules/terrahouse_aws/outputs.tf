@@ -9,3 +9,8 @@ output "s3_website_endpoint" {
   value = aws_s3_bucket_website_configuration.website_config
 
 }
+
+output "cloudfront_distribution_url" {
+  description = "CloudFront distribution static website CLoudFront URL"
+  value = aws_cloudfront_distribution.s3_bucket_distribution.domain_name
+} 
