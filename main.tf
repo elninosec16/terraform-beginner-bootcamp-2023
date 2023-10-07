@@ -16,5 +16,6 @@ module "terraform_aws" {
   project_name        = var.project_name
   index_html_filepath = var.index_html_filepath
   error_html_filepath = var.error_html_filepath
+  content_version     = var.content_version
 
 }

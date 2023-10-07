@@ -535,6 +535,66 @@ jsonencode({"hello"="world"})
 {"hello":"world"}
 ```
 
+### CloudFront Content Version 
+
+1. Update the terrahouse variables.tf anf variables.tfvars files with new variables called:
+```tf
+content_version="1"
+```
+
+2. Terraform content version
+```tf
+variable "content_version" {
+  description = "The content version should be a positive integer starting at 1."
+  type = number
+  
+  validation {
+    condition = var.content_version > 0 && floor(var.content_version) == var.content.version
+  error_message = "The content_version variable must be a positive integer starting at 1."
+  }
+}
+```
+
+3. Conifgure a new resource lifecycle[^10] for the CloudFront Distribution:
+```tf
+resource "azurerm_resource_group" "example" {
+  # ...
+
+  #This is the resource lifecycle described on this section:
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+```
+
+- Resource lifecycle[^1] applied on the `object_index_html` and `object_error_html` on the storage.tf module file only when the content of those files changes, and not when the etag changes.
+```tf
+
+  etag
+  #Ignore everytime that the etag's changes. The changes will only apply when either the index.html or error.html changes. 
+  lifecycle {
+    ignore_changes = [etag]
+  }
+```
+
+- Managed resource lifecycle keep track when the `content_version` changes[^11] on the `object_index_html` or `object_error_html` files changes.
+```tf
+#This is a new feature on Terraform
+resource "terraform_data" {
+  input = var.content.version
+}
+
+#In the resource config in order to call this trigger, you should configure it as follow:
+
+  etag = filemd5(var.index_html_filepath)
+  lifecycle {
+    replace_triggered_by = [terraform_data.content_version.output]
+    ignore_changes = [etag]
+  }
+
+```
+
+
 #### Terraform or Git new commands
 
 - Delete tags
@@ -572,3 +632,7 @@ git push origin :refs/tags/<tag-name>
 [^8]:[Data Source:aws_called_identity](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity)
 
 [^9]:[jsonencode Function](https://developer.hashicorp.com/terraform/language/functions/jsonencode)
+
+[^10]:[The lifecycle Meta-Argument](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
+
+[^11]:[The terraform_data Managed Resource Type](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
