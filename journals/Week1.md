@@ -594,6 +594,65 @@ resource "terraform_data" {
 
 ```
 
+### Terraform `for_each`[^12] function:
+
+It is used to repeat similar action on resources inside of a `map or string`.
+
+- Create a `asset` path variable:
+variable.tf
+```tf
+variable "assets_path" {
+  description = "New assets path variable"
+  value       = string
+}
+```
+
+- Define the `assets` path variable on the `terraform.tfvars` file:
+
+```tf
+assets_path="<file_relative_path>"
+```
+
+#### Terraform file set:
+- Create a new folder called `assets` inside modules/terrahouse_aws
+```tf
+fileset("${path.root}/public/assets","*.{jpg,png,gif}")
+```
+
+- New S3 bucket object to grab files inside the `assets` folder:
+1. Without using the variable configuration
+```tf
+resource "aws_s3_object" "upload_assets" {
+  for_each      = fileset("${path.root}/public/assets","*.{jpg,png,gif}")
+  bucket        = aws_s3_bucket.website_bucket.bucket
+  key           = "assets/${each.key}" s
+  source        = "${path.root}/public/assets/${each.key}"
+  #content_type = "text.html"
+  etag          = filemd5("${path.root}/public/assets/${each.key}")
+  lifecycle {
+    replace_triggered_by = [terraform_data.content_version.output]
+    ignore_changes       = [etag]
+  }
+   
+}
+```
+
+2. Using variable configuration:
+```tf
+resource "aws_s3_object" "upload_assets" {
+  for_each      = fileset(var.assets_path,"*.{jpg,png,gif}")
+  bucket        = aws_s3_bucket.website_bucket.bucket
+  key           = "assets/${each.key}" 
+  source        = "${var.assets_path}/${each.key}"
+  #content_type = "text.html"
+  etag          = filemd5("{$var.assets_path}/${each.key}")
+  lifecycle {
+    replace_triggered_by = [terraform_data.content_version.output]
+    ignore_changes       = [etag]
+  }
+   
+}
+```
 
 #### Terraform or Git new commands
 
@@ -636,3 +695,5 @@ git push origin :refs/tags/<tag-name>
 [^10]:[The lifecycle Meta-Argument](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
 
 [^11]:[The terraform_data Managed Resource Type](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
+
+[^12]:[The for_each Meta-Argument](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each)
