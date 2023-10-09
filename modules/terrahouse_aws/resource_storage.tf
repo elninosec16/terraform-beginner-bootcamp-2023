@@ -73,6 +73,19 @@ resource "aws_s3_object" "error_object" {
   }
 }
 
+resource "aws_s3_object" "upload_assets" {
+  for_each      = fileset(var.assets_path,"*.{jpg,png,gif}")
+  bucket        = aws_s3_bucket.s3-btcamp-tst.bucket
+  key           = "assets/${each.key}" 
+  source        = "${var.assets_path}/${each.key}"
+  #content_type = "text.html"
+  etag          = filemd5("${var.assets_path}/${each.key}")
+  lifecycle {
+    replace_triggered_by = [terraform_data.content_version.output]
+    ignore_changes       = [etag]
+  }
+}
+
 #S3 local origin ID configuration:
 locals {
   s3_origin_id = "myS3Origin"
