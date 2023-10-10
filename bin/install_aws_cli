@@ -1,11 +1,11 @@
 #!/usr/bin/env-bash
 
-cd /home/elninosec16/Documents/TF_BootCamp/tf-bootcamp-repo/workspace
+cd /workspace/
 
-rm -f '/home/elninosec16/Documents/TF_BootCamp/tf-bootcamp-repo/workspace/awscliv2.zip'
-rm -rf '/home/elninosec16/Documents/TF_BootCamp/tf-bootcamp-repo/workspace/aws'
+rm -f '/workspace/awscliv2.zip'
+rm -rf '/workspace/aws'
 
-cd /home/elninosec16/Documents/TF_BootCamp/tf-bootcamp-repo/workspace
+cd /workspace
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     unzip awscliv2.zip
     sudo ./aws/install
