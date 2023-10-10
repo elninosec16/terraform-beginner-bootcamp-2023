@@ -48,8 +48,8 @@ resource "aws_cloudfront_distribution" "s3_bucket_distribution" {
 
   restrictions {
     geo_restriction {
-      restriction_type = "whitelist"
-      locations        = ["US", "CA"]
+      restriction_type = "none"
+      locations        = []
     }
   }
 
@@ -64,10 +64,7 @@ resource "terraform_data" "invalidate_cache" {
   
   provisioner "local-exec" {
     command = <<COMMAND
-      aws cloudfront create-invalidation \
-      --distribution-id \
-      ${aws_cloudfront_distribution.s3_bucket_distribution.id} \ 
-      --paths '/*'
+      aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.s3_bucket_distribution.id} --paths '/*'
     COMMAND
     
   }

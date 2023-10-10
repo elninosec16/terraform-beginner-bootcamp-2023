@@ -88,29 +88,28 @@ resource "aws_s3_object" "upload_assets" {
 
 #S3 local origin ID configuration:
 locals {
-  s3_origin_id = "myS3Origin"
+  s3_origin_id = "MyS3Origin"
 }
 
 #S3 bucket policies configuration
 resource "aws_iam_policy" "s3_bucket_policy" {
-  name        = "${var.s3_bucket_name}-policy"
   description = "TerraHouse S3 bucket policy"
-
+  name        = "${var.s3_bucket_name}-policy"
+  
   policy = jsonencode({
-  "Version" =  "2012-10-17",
-  "Statement" = {
-      "Sid": "AllowCloudFrontServicePrincipalReadOnly",
-      "Effect": "Allow",
-      "Principal": {
-         "Service": "cloudfront.amazonaws.com"
-      },
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::${aws_s3_bucket.s3-btcamp-tst.id}/*",
-      "Condition": {
-      "StringEquals": {
-          "AWS:SourceArn": "arn:aws:cloudfront::${data.aws_caller_identity.s3_bucket_current_dsource.account_id}:distribution/${aws_cloudfront_distribution.s3_bucket_distribution.id}"
-        }
-      },
-    }
-})
+   "Version" : "2012-10-17",
+   "Statement" : [
+      {
+         "Sid":"AllowCloudFrontServicePrincipal",
+         "Effect"  : "Allow",
+         "Action" : "s3:GetObject",
+         "Resource":"arn:aws:s3:::${aws_s3_bucket.s3-btcamp-tst.id}/*",
+         "Condition":{
+            "StringEquals":{
+                "AWS:SourceArn":"arn:aws:cloudfront::${data.aws_caller_identity.s3_bucket_current_dsource.account_id}:distribution/${aws_cloudfront_distribution.s3_bucket_distribution.id}"
+            }
+         }
+      }
+    ]
+  })
 }
