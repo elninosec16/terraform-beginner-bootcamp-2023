@@ -14,7 +14,7 @@ tasks:
         source ./bin/set_tf_alias
         source ./bin/install_aws_cli
   - name: sinatra
-    before:
+    before: |
       cd terratowns_mock_server
       bundle install
       bundle exec ruby server.rb
