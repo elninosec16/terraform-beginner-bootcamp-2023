@@ -64,3 +64,114 @@ It's also called `Token Authentication`
 
 [Bearer Authentication](https://swagger.io/docs/specification/authentication/bearer-authentication/)
  
+
+### Terraform Terratowns Provider
+1. Create a new foler inside terraform project call
+`terraform-provider-terratowns`
+
+2. Perform the first `main.go` file code
+```go
+package main
+
+// fmt is short for format (formatted I/O).
+import (
+  //"log"
+  "fmt"
+  "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+  "github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
+)
+
+func main () {
+  plugin.Serve(&plugin.ServeOpts{
+    ProviderFunc: Provider,
+  })
+  // format.PrintLine 
+  fmt.Println("Hello, world!")
+}
+
+// in golang, a titlecase function will get exported
+func Provider() *schema.Provider {
+  var p *schema.Provider
+  p = &schema.Provider{
+    ResourcesMap: map[string]*schema.Resource{
+    
+    },
+    DataSourcesMap: map[string]*schema.Resource{
+    
+    },
+    Schema: map[string]*schema.Schema{
+      "endpoint": {
+        Type: schema.TypeString,
+        Required: true,
+        Description: "The endpoint for the external service",
+      },
+      "token": {
+        Type: schema.TypeString,
+        Sensitive: true, //mar value as sensitive to hide it the logs
+        Required: true,
+        Description: "Bearer token for authorization",
+      },
+      "user_uuid": {
+        Type: schema.TypeString,
+        Required: true,
+        Description: "UUID for configuration",
+      },
+    },
+  }  
+  //p.ConfigureContextFunc = providerConfigure(p)
+  return p
+}
+
+```
+
+3. Create a new `.terraformrc` file
+
+```go
+provider_installation {
+  filesystem_mirror {
+    path = "/home/gitpod/.terraform.d/plugins"
+    include ["local.providers/*/*"]
+  }
+  direct {
+    exclude = ["local.providers/*/*"]
+  }
+}
+```
+
+4. New `build_provider` file on the `bin` folder
+```bash
+#! /usr/bin/bash
+
+PLUGIN_DIR="~/.terraform.d/plugins/local.providers/local/terratowns/1.0.0/"
+PLUGIN_NAME="terraform-provider-terratowns_v1.0.0"
+
+cd $PROJECT_ROOT/terraform-provider-terratowns
+cp $PROJECT_ROOT/terraformrc /home/gitpod.terraformrc
+rm -rf ~/.terraform.d/plugins
+rm -rf $PROJECT_ROOT/.terraform
+rm -rf $PROJECT_ROOT/.terraform.lock.hcl
+go build -o $PLUGIN_NAME
+mkrdir -p $PLUGIN_DIR/x86_64/
+mkrdir -p $PLUGIN_DIR/linux_amd64/
+cp $PLUGIN_NAME $PLUGIN_DIR/x86_64
+cp $PLUGIN_NAME $PLUGIN_DIR/linux_amd64
+```
+
+5. New `go.mod` file in the `terraform-provider-terratowns` folder
+```go
+module github.com/ExamProCo/terraform-provider-terratowns
+
+go 1.20
+
+replace github.com/ExamProCo/terraform-provider-terratowns => /workspace/terraform-beginner-bootcamp-2023/terraform-provider-terratowns
+```
+
+6. Ignore the `terraform-provider-terratowns_v1.0.0` to be pushed to Github on the `.gitignore` file
+
+```tf
+terraform-provider-terratowns/terraform-provider-terratowns_v*
+```
+
+### Support Links:
+
+[Terraform Local Providers and Registry Mirror Configuration](https://servian.dev/terraform-local-providers-and-registry-mirror-configuration-b963117dfffa)
