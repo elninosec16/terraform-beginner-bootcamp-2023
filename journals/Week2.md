@@ -172,6 +172,127 @@ replace github.com/ExamProCo/terraform-provider-terratowns => /workspace/terrafo
 terraform-provider-terratowns/terraform-provider-terratowns_v*
 ```
 
-### Support Links:
+### TF Provider Resource Skeleton
 
-[Terraform Local Providers and Registry Mirror Configuration](https://servian.dev/terraform-local-providers-and-registry-mirror-configuration-b963117dfffa)
+1. Test validation function
+```go
+func validateUUID(v interface{}, k string) (ws []string, errors []error) {
+  log.Print("validateUUID:start")
+  value := v.(string)
+  if _,err := uuid.Parse(value); err != nil {
+    errors = append(error, fmt.Errorf("invalid UUID format"))
+  }
+  log.Print("validateUUID:end")
+}
+```
+2. Run the `build_provider` bash script
+```bash
+./bin/build_provider
+```
+3. Add `Go` as VS Code extension 
+```yml
+- golang.go
+```
+
+4. Missing `uuid` import
+```go
+"github.com/google/uuid"
+```
+> after imported it, be sure to be on the `main.go` module in order to install it.
+```go
+go get github.com/ExamProCo/terraform-provider-terratowns
+```
+
+5. Build a new code block for `providerConfigure()` function
+```go
+func providerConfigure(p *schema.Provider) schema.ConfigureConectextFunc {
+  return func(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostic ) {
+    log.Print("providerConfigure:start") 
+    config := Config{
+      Endpoint: d.Get("endpoint").(string),
+      Token: d.Get("token").(string),
+      UserUuid: d.Get("user_uuid").(string),
+    }
+    log.Print("providerConfigure:end")
+    return &config, nil
+  }
+}
+```
+
+6. Import missing `Go` libraries
+```go
+"context"
+"github.com/hasicorp/terraform plugin sdk/v2/diag"
+```
+
+7. Define missing config structure
+```go
+type Config struct {
+  Endpoint string
+  Token string
+  UserUuid string 
+}
+```
+
+8. Create a new resource code block
+```go
+//copy code on the Resource section
+func Provider() *schema.Provider {
+  ResourcesMap: map[string]*schema.Resource{
+    "terratowns_home": Resource(),
+  },
+}
+
+
+//copy this code at the end of the code block
+func Resource() *schema.Resource {
+  log.Print("Resource:start")
+  resource := &schema.Resource{
+    CreateContext: resourceHouseCreate,
+    ReadContext: resourceHouseRead,
+    UpdateContext: resourceHouseUpdate,
+    DeleteContext: resourceHouseDelete,
+  }
+  log.Print("Resource:start")
+  return resource
+}
+
+func resourceHouseCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+  var diags diag.Diagnostics
+  return diags
+
+}
+
+func resourceHouseRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+  var diags diag.Diagnostics
+  return diags
+
+}
+
+func resourceHouseUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+  var diags diag.Diagnostics
+  return diags
+
+}
+
+func resourceHouseDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+  var diags diag.Diagnostics
+  return diags
+
+}
+
+```
+
+## CRUD
+
+It stands for Create, Read, Update and Delete
+
+(Create, read, update and delete)[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete]
+
+
+## Support Links:
+
+[^1]:[Terraform Local Providers and Registry Mirror Configuration](https://servian.dev/terraform-local-providers-and-registry-mirror-configuration-b963117dfffa)
+
+[^2]:[Create, read, update and delete](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
+
