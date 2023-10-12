@@ -20,3 +20,12 @@
 #   assets_path         = var.assets_path
 # 
 # }
+
+resource "terratowns_home" "home" {
+  name            = "How to play Arcanum in 2023"
+  description     = "Arcanum is a game from 2001 that shipped with a lot of bugs."
+  #domain_name     = module.terrahouse_aws.cloudfront_url
+  domain_name     = "3xf332sdfs.cloudfront.net"
+  town            = "gamers-grotto"
+  content_version = 1
+}
