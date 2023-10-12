@@ -24,8 +24,8 @@ class Home
     'melomaniac-mansion',
     'cooker-cove',
     'video-valley',
-    'the nomad pad',
-    'gamers grotto'   
+    'the-nomad-pad',
+    'gamers-grotto'
   ] }
   # visibales to all users
   validates :name, presence: true
