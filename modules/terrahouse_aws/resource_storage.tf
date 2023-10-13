@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "s3-btcamp-tst" {
   bucket = var.s3_bucket_name
   
   tags = {
-    UserUUID = var.user_uuid
+    UserUUID = var.teacherseat_user_uuid
     Name     = var.s3_bucket_name
   }
 }

@@ -1,11 +1,23 @@
-variable "user_uuid" {
-  description  = "The UUID of the uer"
+variable "teacherseat_user_uuid" {
+  description = "User UUID"
   type        = string
+  
+}
+
+variable "terratowns_access_code" {
+  description = "API access code to terratwons"
+  type        = string
+
 }
 
 variable "terraform" {
   description = "terraform manage resource"
   type        = string
+}
+
+variable "terratowns_endpoint" {
+  description = "real URL to terratowns cloud env"
+  type = string
 }
 
 variable "project_name" {

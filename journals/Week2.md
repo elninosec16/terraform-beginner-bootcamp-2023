@@ -290,6 +290,69 @@ It stands for Create, Read, Update and Delete
 (Create, read, update and delete)[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete]
 
 
+## Terratowns Test 
+
+1. Get TeacherSeat User-Uuid and Access Token from the ExamPro.co.
+
+2. Update the `main.tf` with the following
+```tf
+provider "terratowns" {
+  endpoint = "https://terratowns.cloud/api"
+  user_uuid="<exampro.co>"
+  #sesitive information. Do not forget to keep it secret
+  token="<exampro.co>" 
+}
+```
+
+3. Declarer new variables on the `variable.tf` to be used on the `main.tf` 
+```tf
+terratowns_enpoint = "https://terratowns.cloud/api"
+```
+
+- `variable.tf` file:
+```tf
+variable "teacherseat_user_uuid" {
+  type = string
+}
+
+variable "terratows_access_code" {
+  type = string
+}
+
+variable "terratows_endpoint" {
+  type = string
+}
+
+```
+
+- Pass the variables to modules adding them to the `main.tf` file:
+```tf
+teacherseat_user_uuid = var.teacherseat_user_uuid
+terratows_access_code = var.terratows_access_code
+terratows_endpoint = var.terratows_endpoint
+```
+
+4. For the access toke, a new `env` variables needs to be created as `Sensitive` `env local variables`.
+```bs
+export TF_VAR_terratowns_access_code="<access-code>"
+gp env TF_VAR_terratowns_access_code="<access-code>"
+
+export TF_VAR_teacherseat_user_uuid="<access-code>"
+gp env TF_VAR_teacherseat_user_uuid="<access-code>"
+``` 
+5. Review the config on the `main.tf` and `variables.tf` files for the `assets_path`
+```tf
+module "terrahouse_aws" {
+  #missing code line on the main.tf file
+  assets_path = var.assets_path
+}
+
+#also be sure to add the right path on the current config
+#"..-bootcamp-2023/public/assetS/"
+```
+
+6. Uncomment any config from previous tests and builds branches
+
 ## Support Links:
 
 [^1]:[Terraform Local Providers and Registry Mirror Configuration](https://servian.dev/terraform-local-providers-and-registry-mirror-configuration-b963117dfffa)
