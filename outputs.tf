@@ -15,4 +15,5 @@ output "s3_website_endpoint" {
 output "cloudfront_distribution_url" {
   description = "CloudFront distribution static website CLoudFront URL"
   value = module.terrahouse_aws.cloudfront_distribution_url
+  
 } 

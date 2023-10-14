@@ -39,7 +39,7 @@ module "terrahouse_aws" {
 }
 
 resource "terratowns_home" "home" {
-  name = "How to play Arcanum in 2023"
+  name = "Los Peques"
   description = <<DESCRIPTION
 Los Peques is a 3D animation trolls cartoons created in 2001 made in the Providence of Neuquen Argentina. 
 Los Peques town was created in some place on the Andean Patagonian Montain Range of Neuquen. 

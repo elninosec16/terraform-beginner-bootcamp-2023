@@ -92,16 +92,18 @@ locals {
 }
 
 #S3 bucket policies configuration
-resource "aws_iam_policy" "s3_bucket_policy" {
-  description = "TerraHouse S3 bucket policy"
-  name        = "${var.s3_bucket_name}-policy"
+resource "aws_s3_bucket_policy" "s3_bucket_policy" {
+  bucket = aws_s3_bucket.s3-btcamp-tst.bucket
   
   policy = jsonencode({
    "Version" : "2012-10-17",
    "Statement" : [
       {
-         "Sid":"AllowCloudFrontServicePrincipal",
+         "Sid" = "AllowCloudFrontServicePrincipalReadOnly",
          "Effect"  : "Allow",
+         "Principal" = {
+            "Service" = "cloudfront.amazonaws.com"
+         },
          "Action" : "s3:GetObject",
          "Resource":"arn:aws:s3:::${aws_s3_bucket.s3-btcamp-tst.id}/*",
          "Condition":{
