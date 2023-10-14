@@ -6,11 +6,11 @@ output "btcamp_bucket_name" {
 
 output "s3_website_endpoint" {
   description = "S3 bucket name from outputs from module terraform_aws"
-  value = aws_s3_bucket_website_configuration.website_config
+  value = aws_s3_bucket_website_configuration.website_config.website_endpoint
 
 }
 
-output "cloudfront_distribution_url" {
+output "cloudfront_distribution_domain_name" {
   description = "CloudFront distribution static website CLoudFront URL"
   value = aws_cloudfront_distribution.s3_bucket_distribution.domain_name
 } 

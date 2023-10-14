@@ -31,23 +31,41 @@ variable "s3_bucket_name" {
   
 }
 
-variable "index_html_filepath" {
-  description = "The file path for index.html"
-  type        = string
+variable "arepa" {
+  description = "public_path for area home"
+  type = object ({
+    public_path = string
+    content_version = number
+  })
   
 }
 
-variable "error_html_filepath" {
-  description = "The file path for error.html"
-  type        = string
+variable "peques" {
+  description = "public_path for peques home"
+  type = object ({
+    public_path = string
+    content_version = number
+  })
   
 }
 
-variable "content_version" {
-  description = "The content version should be a positive integer starting at 1."
-  type = number
-
-}
+#variable "index_html_filepath" {
+#  description = "The file path for index.html"
+#  type        = string
+#  
+#}
+#
+#variable "error_html_filepath" {
+#  description = "The file path for error.html"
+#  type        = string
+#  
+#}
+#
+#variable "content_version" {
+#  description = "The content version should be a positive integer starting at 1."
+#  type = number
+#
+#}
 
 variable "assets_path" {
   description = "New assets path variable"
