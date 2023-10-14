@@ -42,7 +42,7 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
 }
 
 resource "aws_s3_object" "index_object" {
-  bucket = var.s3_bucket_name
+  bucket = aws_s3_bucket.s3-btcamp-tst.bucket
   key    = "index.html"
   source = "${var.public_path}/index.html"
   content_type = "text/html"
@@ -58,7 +58,7 @@ resource "aws_s3_object" "index_object" {
 }
 
 resource "aws_s3_object" "error_object" {
-  bucket = var.s3_bucket_name
+  bucket = aws_s3_bucket.s3-btcamp-tst.bucket
   key    = "error.html"
   source = "${var.public_path}/error.html"
   content_type = "text/html"
