@@ -1,7 +1,7 @@
 #ClourdFront Origin Access Control (OAC) configuration:
 resource "aws_cloudfront_origin_access_control" "s3_bucket_oac" {
-  name                              = "aws CloudFront OAC ${var.s3_bucket_name}"
-  description                       = "TerraHouse S3 static website hosting OAC ${var.s3_bucket_name}"
+  name                              = "aws CloudFront OAC ${aws_s3_bucket.s3-btcamp-tst.bucket}"
+  description                       = "TerraHouse S3 static website hosting OAC ${aws_s3_bucket.s3-btcamp-tst.bucket}"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
@@ -18,7 +18,7 @@ resource "aws_cloudfront_distribution" "s3_bucket_distribution" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = "S3 bucket static website hosting ${var.s3_bucket_name}"
+  comment             = "S3 bucket static website hosting ${aws_s3_bucket.s3-btcamp-tst.bucket}"
   default_root_object = "index.html"
 
   #this will be used if decide to use custom domains

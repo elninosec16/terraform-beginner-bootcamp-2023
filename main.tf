@@ -1,28 +1,3 @@
-
-terraform {
-  required_providers {
-    terratowns = {
-      source  = "local.providers/local/terratowns"
-      version = "1.0.0"
-    }
-  }
-}
-
-provider "terratowns" {
-  endpoint  = var.terratowns_endpoint
-  user_uuid = var.teacherseat_user_uuid 
-  token     = var.terratowns_access_code
-}
-
-
-#S3 configuration
-#resource "aws_s3_bucket" "s3-btcamp-tst" {
-#  #S3 name restriction
-#  # https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html
-#  bucket = var.s3_bucket_name
-#
-#}
-
 #original module config
 #module "terrahome_aws" {
 #  source = "/workspace/terraform-beginner-bootcamp-2023/modules/terrahome_aws"
@@ -66,29 +41,29 @@ DESCRIPTION
   content_version = var.peques.content_version
 }
 
-#module "home_arepa_hosting" {
-#  source = "/workspace/terraform-beginner-bootcamp-2023/modules/terrahome_aws"
-#  teacherseat_user_uuid = var.teacherseat_user_uuid
-#  terratowns_access_code = var.terratowns_access_code
-#  terratowns_endpoint = var.terratowns_endpoint
-#  public_path = var.arepa.public_path
-#  content_version = var.arepa.content_version
-#  s3_bucket_name      = var.s3_bucket_name
-#  terraform           = var.terraform
-#  project_name        = var.project_name
-#}
-
+#Second home configuration
+module "home_arepa_hosting" {
+  source = "/workspace/terraform-beginner-bootcamp-2023/modules/terrahome_aws"
+  teacherseat_user_uuid = var.teacherseat_user_uuid
+  terratowns_access_code = var.terratowns_access_code
+  terratowns_endpoint = var.terratowns_endpoint
+  public_path = var.arepa.public_path
+  content_version = var.arepa.content_version
+  s3_bucket_name      = var.s3_bucket_name
+  terraform           = var.terraform
+  project_name        = var.project_name
+}
 #arepa home module
-#resource "terratowns_home" "home_arepa" {
-#  name = "*** Arepa ***"
-#  description = <<DESCRIPTION
-#  Arepa is a type of food made of ground maize dough stuffed with a filling, 
-#  eaten in northern parts of South America since pre-Columbian times, 
-#  and notable primarily in the cuisine of Colombia and Venezuela, 
-#  but also present in Bolivia, Ecuador, Nicaragua, and Panama.
-#DESCRIPTION
-#  domain_name = module.home_arepa_hosting.cloudfront_distribution_domain_name
-#  #domain_name = "3fdq3g456z.cloudfront.net"
-#  town = "cooker-cove"
-#  content_version = var.arepa.content_version
-#}
+resource "terratowns_home" "home_arepa" {
+  name = "*** Arepa ***"
+  description = <<DESCRIPTION
+  Arepa is a type of food made of ground maize dough stuffed with a filling, 
+  eaten in northern parts of South America since pre-Columbian times, 
+  and notable primarily in the cuisine of Colombia and Venezuela, 
+  but also present in Bolivia, Ecuador, Nicaragua, and Panama.
+DESCRIPTION
+  domain_name = module.home_arepa_hosting.cloudfront_distribution_domain_name
+  #domain_name = "3fdq3g456z.cloudfront.net"
+  town = "cooker-cove"
+  content_version = var.arepa.content_version
+}
