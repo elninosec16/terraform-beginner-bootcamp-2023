@@ -1,14 +1,14 @@
-# #how to use random provider
-# terraform {
-#     cloud {
-#     organization = "ElninoSec16"
-# 
-#     workspaces {
-#       name = "tf-beginner-bootcamp-wkspce"
-#     }
-#   }
-# }  
-# 
+#how to use random provider
+terraform {
+    cloud {
+    organization = "ElninoSec16"
+
+    workspaces {
+      name = "tf-beginner-bootcamp-wkspce"
+    }
+  }
+}  
+
 provider "aws" {
     
   default_tags {

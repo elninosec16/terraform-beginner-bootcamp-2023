@@ -2,9 +2,20 @@ s3_bucket_name="yc7b0k6vvvojb00dqqsbmhsjplx9xr5h"
 terratowns_endpoint="https://terratowns.cloud/api"
 project_name="TF BootCamp Beginner 2003"
 terraform="True"
-#index_html_filepath="/home/elninosec16/Documents/TF_BootCamp/tf-bootcamp-repo/workspace/terraform-beginner-bootcamp-2023/public/index.html"
-#error_html_filepath="/home/elninosec16/Documents/TF_BootCamp/tf-bootcamp-repo/workspace/terraform-beginner-bootcamp-2023/public/error.html"
-error_html_filepath="public/error.html"
-index_html_filepath="public/index.html"
-assets_path="public/assets/"
-content_version="1"
+arepa = {
+  public_path = "/workspace/terraform-beginner-bootcamp-2023/public/arepa"
+  content_version = 1
+}
+
+peques = {
+  public_path = "/workspace/terraform-beginner-bootcamp-2023/public/peques"
+  content_version = 1
+}
+
+#old config:
+#index_html_filepath="/workspace/terraform-beginner-bootcamp-2023/public/index.html"
+#error_html_filepath="/workspace/terraform-beginner-bootcamp-2023/public/error.html"
+#error_html_filepath="public/error.html"
+#index_html_filepath="public/index.html"
+#assets_path="public/assets/"
+#content_version="1"
