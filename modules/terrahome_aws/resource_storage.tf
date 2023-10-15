@@ -20,7 +20,7 @@ resource "aws_s3_bucket" "s3-btcamp-tst" {
 }
 
 resource "aws_s3_bucket_website_configuration" "website_config" {
-  bucket = aws_s3_bucket.s3-btcamp-tst.bucket
+  bucket = aws_s3_bucket.s3-btcamp-tst.id
 
   index_document {
     suffix = "index.html"
@@ -42,7 +42,7 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
 }
 
 resource "aws_s3_object" "index_object" {
-  bucket = aws_s3_bucket.s3-btcamp-tst.bucket
+  bucket = aws_s3_bucket.s3-btcamp-tst.id
   key    = "index.html"
   source = "${var.public_path}/index.html"
   content_type = "text/html"
@@ -58,7 +58,7 @@ resource "aws_s3_object" "index_object" {
 }
 
 resource "aws_s3_object" "error_object" {
-  bucket = aws_s3_bucket.s3-btcamp-tst.bucket
+  bucket = aws_s3_bucket.s3-btcamp-tst.id
   key    = "error.html"
   source = "${var.public_path}/error.html"
   content_type = "text/html"
@@ -75,9 +75,9 @@ resource "aws_s3_object" "error_object" {
 
 resource "aws_s3_object" "upload_assets" {
   for_each      = fileset("${var.public_path}/assets","*.{jpg,png,gif}")
-  bucket        = aws_s3_bucket.s3-btcamp-tst.bucket
+  bucket        = aws_s3_bucket.s3-btcamp-tst.id
   key           = "assets/${each.key}" 
-  source        = "${var.public_path}/${each.key}"
+  source        = "${var.public_path}/assets/${each.key}"
   #content_type = "text.html"
   etag          = filemd5("${var.public_path}/assets/${each.key}")
   lifecycle {
@@ -93,7 +93,7 @@ locals {
 
 #S3 bucket policies configuration
 resource "aws_s3_bucket_policy" "s3_bucket_policy" {
-  bucket = aws_s3_bucket.s3-btcamp-tst.bucket
+  bucket = aws_s3_bucket.s3-btcamp-tst.id
   
   policy = jsonencode({
    "Version" : "2012-10-17",
