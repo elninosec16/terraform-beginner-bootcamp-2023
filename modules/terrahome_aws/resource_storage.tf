@@ -11,16 +11,15 @@ resource "terraform_data" "content_version" {
 resource "aws_s3_bucket" "s3-btcamp-tst" {
   #S3 name restriction
   # https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html
-  bucket = var.s3_bucket_name
+  #bucket = var.s3_bucket_name
   
   tags = {
     UserUUID = var.teacherseat_user_uuid
-    Name     = var.s3_bucket_name
   }
 }
 
 resource "aws_s3_bucket_website_configuration" "website_config" {
-  bucket = aws_s3_bucket.s3-btcamp-tst.id
+  bucket = aws_s3_bucket.s3-btcamp-tst.bucket
 
   index_document {
     suffix = "index.html"
@@ -42,7 +41,7 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
 }
 
 resource "aws_s3_object" "index_object" {
-  bucket = aws_s3_bucket.s3-btcamp-tst.id
+  bucket = aws_s3_bucket.s3-btcamp-tst.bucket
   key    = "index.html"
   source = "${var.public_path}/index.html"
   content_type = "text/html"
@@ -58,7 +57,7 @@ resource "aws_s3_object" "index_object" {
 }
 
 resource "aws_s3_object" "error_object" {
-  bucket = aws_s3_bucket.s3-btcamp-tst.id
+  bucket = aws_s3_bucket.s3-btcamp-tst.bucket
   key    = "error.html"
   source = "${var.public_path}/error.html"
   content_type = "text/html"
@@ -75,7 +74,7 @@ resource "aws_s3_object" "error_object" {
 
 resource "aws_s3_object" "upload_assets" {
   for_each      = fileset("${var.public_path}/assets","*.{jpg,png,gif}")
-  bucket        = aws_s3_bucket.s3-btcamp-tst.id
+  bucket        = aws_s3_bucket.s3-btcamp-tst.bucket
   key           = "assets/${each.key}" 
   source        = "${var.public_path}/assets/${each.key}"
   #content_type = "text.html"
@@ -93,7 +92,7 @@ locals {
 
 #S3 bucket policies configuration
 resource "aws_s3_bucket_policy" "s3_bucket_policy" {
-  bucket = aws_s3_bucket.s3-btcamp-tst.id
+  bucket = aws_s3_bucket.s3-btcamp-tst.bucket
   
   policy = jsonencode({
    "Version" : "2012-10-17",
